@@ -16,7 +16,6 @@ public class HttpRequest {
 
     public static String request(String requestMethod, String url, String params) {
         URL obj;
-        if (!url.substring(0, 7).equalsIgnoreCase("http://")) url = "http://" + url;
         if (requestMethod.equalsIgnoreCase("get")) {
             try {
                 obj = new URL(url + "?" + params);
