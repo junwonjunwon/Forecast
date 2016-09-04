@@ -88,6 +88,18 @@ public class WeatherWindow extends JFrame implements ActionListener {
             locationString = "N/A";
         }
 
+        String[] dateString = weatherInfo.get("date").split("[^\\d]+");
+
+        int probability;
+        String holidayInfo = "";
+        String response = Holiday.check(Integer.parseInt(dateString[0]), Integer.parseInt(dateString[1]), Integer.parseInt(dateString[2]));
+        if (response.equalsIgnoreCase("none")) {
+            probability = this.getProbability(weatherInfo);
+        } else {
+            probability = 0;
+            holidayInfo = " (" + response + ")";
+        }
+
         location.setText("위치: " + locationString);
         date.setText("날짜: " + weatherInfo.get("date"));
         hour.setText("시각: " + weatherInfo.get("hour") + "시");
@@ -97,9 +109,15 @@ public class WeatherWindow extends JFrame implements ActionListener {
         rainAmount.setText("예상강수량: " + weatherInfo.get("rainAmount") + " mm");
         humidity.setText("습도: " + weatherInfo.get("humidity") + " %");
         windSpeed.setText("풍속: " + weatherInfo.get("windSpeed") + " m/s");
-        outsidePercent.setText("야외점호 확률: ??%");
+        outsidePercent.setText("야외점호 확률: " + probability + " %" + holidayInfo);
+
+        this.pack();
 
         System.out.println(weatherInfo.toString());
+    }
+
+    private int getProbability(Map <String, String> weatherInfo) {
+        return 50;
     }
 
     @Override
