@@ -71,7 +71,6 @@ public class WeatherWindow extends JFrame implements ActionListener {
         this.getWeather();
 
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
-        this.pack();
         this.setLocationRelativeTo(null);
         this.setVisible(true);
     }
